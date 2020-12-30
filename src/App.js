@@ -21,12 +21,24 @@ class App extends React.Component {
   unsibscribeFromAuth = null;
 
   componentDidMount() {
-    this.unsibscribeFromAuth = auth.onAuthStateChanged(async user => {
-      // this.setState({
-      //   currentUser: user,
-      // });
-      createUserProfileDocument(user);
-      console.log(user);
+    this.unsibscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot(snapShop => {
+          this.setState({
+            currentUser: {
+              id: snapShop.id,
+              ...snapShop.data()
+            }
+          })
+        })
+      } else {
+        this.setState({
+          currentUser: userAuth
+        })
+      } 
     });
   }
 
