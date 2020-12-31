@@ -8,7 +8,10 @@ import { auth } from '../../firebase/firebase.utils';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 
-const Header = ({ currentUser }) => {
+import CartIcon from '../cartIcon/CartIcon';
+import CartDropdown from '../cartDropdown/CartDropdown';
+
+const Header = ({ currentUser, hidden }) => {
   return (
     <div className="header">
       <Link className="logo-container" to="/">
@@ -21,19 +24,28 @@ const Header = ({ currentUser }) => {
         <Link className="option" to="/contact">
           CONTACT
         </Link>
-        {
-          currentUser ?
-          <div className='option' onClick={()=> auth.signOut()}>SIGN OUT</div>
-          :
-          <Link className='option' to='/auth'>SIGN IN</Link>
-        }
+        {currentUser ? (
+          <div className="option" onClick={() => auth.signOut()}>
+            SIGN OUT
+          </div>
+        ) : (
+          <Link className="option" to="/auth">
+            SIGN IN
+          </Link>
+        )}
+        <CartIcon />
       </div>
+      {hidden ? null : <CartDropdown />}
     </div>
   );
 };
 
-const mapStateToProps = state => ({
-  currentUser: state.userReducer.currentUser
-})
+const mapStateToProps = ({
+  userReducer: { currentUser },
+  cartReducer: { hidden },
+}) => ({
+  currentUser,
+  hidden,
+});
 
 export default connect(mapStateToProps)(Header);
