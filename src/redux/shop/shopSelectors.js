@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import shopReducer from './shopReducer';
 // import shopReducer from './shopReducer';
 
 const selectShop = (state) => state.shopReducer;
@@ -22,4 +23,9 @@ export const selectCollection = (collectionUrlParam) =>
 export const selectIsCollectionFetching = createSelector(
   [selectShop],
   (shopReducer) => shopReducer.isFetching
+);
+
+export const selectIsCollectionLoaded = createSelector(
+  [selectShop],
+  (shopReducer) => !!shopReducer.collections
 );
