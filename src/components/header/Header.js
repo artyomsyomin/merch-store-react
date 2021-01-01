@@ -16,7 +16,7 @@ import { selectCurrentUser } from '../../redux/user/userSelectors';
 
 import { auth } from '../../firebase/firebase.utils';
 
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 
 import CartIcon from '../cartIcon/CartIcon';

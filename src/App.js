@@ -21,7 +21,10 @@ class App extends React.Component {
   unsibscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
+    const {
+      setCurrentUser,
+      // collectionsArray
+    } = this.props;
 
     this.unsibscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
