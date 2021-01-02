@@ -21,25 +21,22 @@ class App extends React.Component {
   unsibscribeFromAuth = null;
 
   componentDidMount() {
-    const {
-      setCurrentUser,
-      // collectionsArray
-    } = this.props;
+    const { setCurrentUser } = this.props;
 
-    this.unsibscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
+    // this.unsibscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+    //   if (userAuth) {
+    //     const userRef = await createUserProfileDocument(userAuth);
 
-        userRef.onSnapshot((snapShop) => {
-          setCurrentUser({
-            id: snapShop.id,
-            ...snapShop.data(),
-          });
-        });
-      } else {
-        setCurrentUser(userAuth);
-      }
-    });
+    //     userRef.onSnapshot((snapShop) => {
+    //       setCurrentUser({
+    //         id: snapShop.id,
+    //         ...snapShop.data(),
+    //       });
+    //     });
+    //   } else {
+    //     setCurrentUser(userAuth);
+    //   }
+    // });
   }
 
   componentWillUnmount() {
