@@ -4,7 +4,6 @@ import CollectionItem from '../../components/collectionItem/CollectionItem';
 
 import { connect } from 'react-redux';
 import { selectCollection } from '../../redux/shop/shopSelectors';
-
 import './CollectionPage.scss';
 
 const CollectionPage = ({ collection }) => {
