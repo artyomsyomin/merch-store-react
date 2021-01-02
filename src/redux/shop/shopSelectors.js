@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-import shopReducer from './shopReducer';
 // import shopReducer from './shopReducer';
 
 const selectShop = (state) => state.shopReducer;
