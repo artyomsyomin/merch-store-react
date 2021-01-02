@@ -11,6 +11,7 @@ import AuthPage from './pages/authPage/AuthPage';
 import CheckoutPage from './pages/checkoutPage/CheckoutPage';
 
 import { selectCurrentUser } from './redux/user/userSelectors';
+import { checkUserSession } from './redux/user/userActions';
 
 import { connect } from 'react-redux';
 
@@ -18,19 +19,8 @@ class App extends React.Component {
   unsibscribeFromAuth = null;
 
   componentDidMount() {
-    // this.unsibscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-    //   if (userAuth) {
-    //     const userRef = await createUserProfileDocument(userAuth);
-    //     userRef.onSnapshot((snapShop) => {
-    //       setCurrentUser({
-    //         id: snapShop.id,
-    //         ...snapShop.data(),
-    //       });
-    //     });
-    //   } else {
-    //     setCurrentUser(userAuth);
-    //   }
-    // });
+    const { checkUserSession } = this.props;
+    checkUserSession();
   }
 
   componentWillUnmount() {
@@ -62,4 +52,8 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => ({
+  checkUserSession: () => dispatch(checkUserSession()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
